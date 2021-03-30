@@ -1,0 +1,18 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet  author="piotr"  id="1">
+        <createTable  tableName="USERS">
+            <column  name="ID"  type="BIGINT" >
+            <constraints primaryKey="true"/>
+            </column>
+            <column  name="NAME"  type="VARCHAR2(15)"/>
+            <column  name="ROLE"  type="VARCHAR2(255)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
+
+
