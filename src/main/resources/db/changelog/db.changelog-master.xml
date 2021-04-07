@@ -12,6 +12,47 @@
             <column  name="NAME"  type="VARCHAR2(15)"/>
             <column  name="ROLE"  type="VARCHAR2(255)"/>
         </createTable>
+
+        <createTable  tableName="GROUPS">
+            <column  name="ID"  type="BIGINT" >
+                <constraints primaryKey="true"/>
+            </column>
+            <column  name="USERS_ID"  type="BIGINT"/>
+            <column  name="NUMBER_OF_USERS"  type="VARCHAR2(255)"/>
+        </createTable>
+
+        <createTable  tableName="NOTE">
+            <column  name="ID"  type="BIGINT" >
+                <constraints primaryKey="true"/>
+            </column>
+            <column  name="TITLE"  type="VARCHAR2(15)"/>
+            <column  name="DESCRIPTION"  type="VARCHAR2(255)"/>
+            <column  name="DATE_OF_CREATED"  type="DATE"/>
+            <column  name="USERS_ID"  type="VARCHAR2(255)"/>
+            <column  name="DATE_OF_LAPSE"  type="DATE"/>
+        </createTable>
+
+        <createTable  tableName="TASK">
+            <column  name="ID"  type="BIGINT" >
+                <constraints primaryKey="true"/>
+            </column>
+            <column  name="TITLE"  type="VARCHAR2(15)"/>
+            <column  name="DESCRIPTION"  type="BOOLEAN"/>
+            <column  name="IS_DAILY"  type="BOOLEAN"/>
+            <column  name="OWNER_ID"  type="BIGINT"/>
+            <column  name="HOW_MANY_TIMES_A_DAY"  type="BIGINT"/>
+            <column  name="USERS_ID"  type="BIGINT"/>
+        </createTable>
+
+        <createTable  tableName="USER_GROUP">
+            <column  name="ID"  type="BIGINT" >
+                <constraints primaryKey="true"/>
+            </column>
+            <column  name="USERS_ID"  type="BIGINT"/>
+            <column  name="GROUPS_ID"  type="BIGINT"/>
+
+        </createTable>
+
     </changeSet>
 </databaseChangeLog>
 
