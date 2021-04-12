@@ -16,13 +16,18 @@ import java.util.List;
 @AllArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user")
     private long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "username")
+    private String username;
 
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "enabled")
+    private Boolean enabled;
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private Role role;

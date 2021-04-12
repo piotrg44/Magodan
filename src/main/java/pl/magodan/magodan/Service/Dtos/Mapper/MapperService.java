@@ -16,7 +16,7 @@ public class MapperService {
     public UserResponse userToUserResponse(User user) {
         return UserResponse
                 .builder()
-                .name(user.getName())
+                .name(user.getUsername())
                 .role(user.getRole())
                 .tasks(user.getTasks().stream().map(Task::getId).collect(Collectors.toList()))
 //                .groups(user.getGroups().stream().map(Group::getId).collect(Collectors.toList()))
@@ -26,7 +26,7 @@ public class MapperService {
     public List<UserResponse> usersToUsersResponse(List<User> users) {
         return users.stream().map(user ->UserResponse
                 .builder()
-                .name(user.getName())
+                .name(user.getUsername())
                 .role(user.getRole())
                 .tasks(user.getTasks().stream().map(Task::getId).collect(Collectors.toList()))
 //                .groups(user.getGroups().stream().map(Group::getId).collect(Collectors.toList()))

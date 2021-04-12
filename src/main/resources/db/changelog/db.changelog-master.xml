@@ -7,34 +7,36 @@
     <changeSet  author="piotr"  id="1">
         <createTable  tableName="USERS">
             <column  name="ID"  type="BIGINT" >
-            <constraints primaryKey="true"/>
+            <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column  name="NAME"  type="VARCHAR2(15)"/>
+            <column  name="USERNAME"  type="VARCHAR2(15)"/>
+            <column  name="PASSWORD"  type="VARCHAR2(15)"/>
+            <column  name="ENABLED"  type="BOOLEAN"/>
             <column  name="ROLE"  type="VARCHAR2(255)"/>
+        </createTable>
+
+        <createTable  tableName="NOTE">
+            <column  name="ID"  type="BIGINT" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column  name="TITLE"  type="VARCHAR2(15)"/>
+            <column  name="DESCRIPTION"  type="VARCHAR2(255)"/>
+            <column  name="DATE_OF_CREATED"  type="DATE"/>
+            <column  name="USERS_ID"  type="BIGINT"/>
+            <column  name="DATE_OF_LAPSE"  type="DATE"/>
         </createTable>
 
         <createTable  tableName="GROUPS">
             <column  name="ID"  type="BIGINT" >
-                <constraints primaryKey="true"/>
+                <constraints primaryKey="true" nullable="false"/>
             </column>
             <column  name="USERS_ID"  type="BIGINT"/>
             <column  name="NUMBER_OF_USERS"  type="VARCHAR2(255)"/>
         </createTable>
 
-        <createTable  tableName="NOTE">
-            <column  name="ID"  type="BIGINT" >
-                <constraints primaryKey="true"/>
-            </column>
-            <column  name="TITLE"  type="VARCHAR2(15)"/>
-            <column  name="DESCRIPTION"  type="VARCHAR2(255)"/>
-            <column  name="DATE_OF_CREATED"  type="DATE"/>
-            <column  name="USERS_ID"  type="VARCHAR2(255)"/>
-            <column  name="DATE_OF_LAPSE"  type="DATE"/>
-        </createTable>
-
         <createTable  tableName="TASK">
             <column  name="ID"  type="BIGINT" >
-                <constraints primaryKey="true"/>
+                <constraints primaryKey="true" nullable="false"/>
             </column>
             <column  name="TITLE"  type="VARCHAR2(15)"/>
             <column  name="DESCRIPTION"  type="BOOLEAN"/>
@@ -46,12 +48,52 @@
 
         <createTable  tableName="USER_GROUP">
             <column  name="ID"  type="BIGINT" >
-                <constraints primaryKey="true"/>
+                <constraints primaryKey="true" nullable="false"/>
             </column>
             <column  name="USERS_ID"  type="BIGINT"/>
             <column  name="GROUPS_ID"  type="BIGINT"/>
-
         </createTable>
+
+        <createTable  tableName="AUTHORITIES">
+            <column  name="USERNAME"  type="VARCHAR(255)"/>
+            <column  name="AUTHORITY"  type="VARCHAR(255)"/>
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="fk_user_authority"
+                                 baseTableName="AUTHORITIES"
+                                 baseColumnNames="USERNAME"
+                                 referencedTableName="USERS"
+                                 referencedColumnNames="USERNAME"/>
+
+        <addForeignKeyConstraint constraintName="fk_owner_task"
+                                 baseTableName="USERS"
+                                 baseColumnNames="ID"
+                                 referencedTableName="TASK"
+                                 referencedColumnNames="OWNER_ID"/>
+
+        <addForeignKeyConstraint constraintName="fk_member_note"
+                                 baseTableName="USERS"
+                                 baseColumnNames="ID"
+                                 referencedTableName="NOTE"
+                                 referencedColumnNames="USERS_ID"/>
+
+        <addForeignKeyConstraint constraintName="fk_task_owner"
+                                 baseTableName="USERS"
+                                 baseColumnNames="ID"
+                                 referencedTableName="TASK"
+                                 referencedColumnNames="USERS_ID"/>
+
+        <addForeignKeyConstraint constraintName="fk_users_groups_users"
+                                 baseTableName="USERS"
+                                 baseColumnNames="ID"
+                                 referencedTableName="USER_GROUP"
+                                 referencedColumnNames="USERS_ID"/>
+
+        <addForeignKeyConstraint constraintName="fk_users_groups_groups"
+                                 baseTableName="GROUPS"
+                                 baseColumnNames="ID"
+                                 referencedTableName="USER_GROUP"
+                                 referencedColumnNames="GROUPS_ID"/>
 
     </changeSet>
 </databaseChangeLog>

@@ -18,16 +18,16 @@ public class TaskController {
 
     @GetMapping("/tasks")
     public ResponseEntity<List<TaskResponse>> getTasks() {
-        return new ResponseEntity<>(taskService.findAll(), HttpStatus.FOUND);
+        return new ResponseEntity<>(taskService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/task/{id}")
     public ResponseEntity<TaskResponse> getTaskById(@PathVariable long id) {
-        return new ResponseEntity<>(taskService.findById(id), HttpStatus.FOUND);
+        return new ResponseEntity<>(taskService.findById(id), HttpStatus.OK);
     }
 
     @GetMapping("/task/{id}/participants")
     public ResponseEntity<List<Long>> getAllTaskParticipants(@PathVariable long id) {
-        return new ResponseEntity<>(taskService.findById(id).getParticipantsId(), HttpStatus.FOUND);
+        return new ResponseEntity<>(taskService.findById(id).getParticipantsId(), HttpStatus.OK);
     }
 }

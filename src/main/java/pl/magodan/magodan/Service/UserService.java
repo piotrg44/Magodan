@@ -28,7 +28,7 @@ public class UserService {
         User user =
                 User
                         .builder()
-                        .name("User1")
+                        .username("User1")
                         .role(Role.OWNER)
                         .build();
         userRepository.save(user);
@@ -36,7 +36,7 @@ public class UserService {
         User user2 =
                 User
                         .builder()
-                        .name("User2")
+                        .username("User2")
                         .role(Role.USER)
                         .build();
         userRepository.save(user2);
@@ -44,7 +44,7 @@ public class UserService {
         User user3 =
                 User
                         .builder()
-                        .name("User3")
+                        .username("User3")
                         .role(Role.USER)
                         .build();
         userRepository.save(user3);
